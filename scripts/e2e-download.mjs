@@ -19,7 +19,8 @@ try {
   await cdp.send('Browser.setDownloadBehavior', { behavior: 'allow', downloadPath });
 
   await page.goto(url, { waitUntil: 'networkidle0', timeout: 60_000 });
-  await page.select('select[name="lang"]', 'en-zh');
+  await page.select('select[name="lang1"]', 'en');
+  await page.select('select[name="lang2"]', 'zh');
   await page.type('input[name="fromName"]', '深圳市恒发贸易有限公司');
   await page.type('input[data-k="desc"]', '不锈钢保温杯 Stainless steel tumbler');
   await page.type('input[data-k="qty"]', '500');

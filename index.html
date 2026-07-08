@@ -79,7 +79,7 @@
       {
         "@type": "Question",
         "name": "Can I make a Chinese, Japanese, or bilingual invoice?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Set Invoice language to Chinese, Japanese, or a bilingual mode (English + Chinese, English + Japanese, Chinese + Japanese) and every label switches language, e.g. \"Amount / 金额\". Simplified Chinese, traditional Chinese, and Japanese all render correctly in the PDF." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Pick a primary language (English, Chinese, or Japanese) and optionally a second language — every label switches accordingly, e.g. \"Amount / 金额\". Simplified Chinese, traditional Chinese, and Japanese all render correctly in the PDF." }
       }
     ]
   }
@@ -125,14 +125,20 @@
         </div>
         <div class="grid-3">
           <label class="field">
-            <span>Invoice language</span>
-            <select name="lang">
+            <span>Language</span>
+            <select name="lang1">
               <option value="en">English</option>
               <option value="zh">中文 (Chinese)</option>
               <option value="ja">日本語 (Japanese)</option>
-              <option value="en-zh">English + 中文</option>
-              <option value="en-ja">English + 日本語</option>
-              <option value="zh-ja">中文 + 日本語</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Second language (optional)</span>
+            <select name="lang2">
+              <option value="">None</option>
+              <option value="en">English</option>
+              <option value="zh">中文 (Chinese)</option>
+              <option value="ja">日本語 (Japanese)</option>
             </select>
           </label>
           <label class="field">
@@ -294,7 +300,7 @@
         </details>
         <details>
           <summary>Can I make a Chinese, Japanese, or bilingual invoice?</summary>
-          <p>Yes. Set <em>Invoice language</em> to 中文, 日本語, or a bilingual mode (English + 中文, English + 日本語, 中文 + 日本語) and every label — including the title — switches language, e.g. "Amount / 金额". See the <a href="/bilingual-invoice-template">bilingual invoice template</a> page for details.</p>
+          <p>Yes. Pick a primary <em>Language</em> (English, 中文, or 日本語) and optionally a <em>Second language</em> — every label, including the title, switches accordingly, e.g. "Amount / 金额". See the <a href="/bilingual-invoice-template">bilingual invoice template</a> page for details.</p>
         </details>
       </section>
 

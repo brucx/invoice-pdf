@@ -48,6 +48,11 @@ const CASES = [
     wantFont: 'NotoSansSC',
   },
   {
+    lang: 'ja-en', // reversed order: primary ja + secondary en, exercises the JP font
+    inv: { ...base, lang: 'ja-en', fromName: '株式会社山田商事', notes: 'お支払いは銀行振込でお願いします。' },
+    wantFont: 'NotoSansJP',
+  },
+  {
     lang: 'zh-ja',
     inv: {
       ...base, lang: 'zh-ja', currency: 'JPY',

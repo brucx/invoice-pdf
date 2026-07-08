@@ -1,15 +1,6 @@
 // Invoice-content label translations. UI stays English; these localize the
 // invoice itself (preview + PDF). Bilingual options join both languages.
 
-export const LANG_OPTIONS = [
-  { value: 'en', label: 'English' },
-  { value: 'zh', label: '中文 (Chinese)' },
-  { value: 'ja', label: '日本語 (Japanese)' },
-  { value: 'en-zh', label: 'English + 中文' },
-  { value: 'en-ja', label: 'English + 日本語' },
-  { value: 'zh-ja', label: '中文 + 日本語' },
-];
-
 const STRINGS = {
   en: {
     title: 'INVOICE',

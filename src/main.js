@@ -30,12 +30,27 @@ function saveDraft() {
 // --- form <-> state ---
 
 const SCALAR_FIELDS = [
-  'number', 'issueDate', 'dueDate', 'lang', 'currency', 'taxRate', 'discount',
+  'number', 'issueDate', 'dueDate', 'currency', 'taxRate', 'discount',
   'fromName', 'fromDetails', 'toName', 'toDetails', 'notes',
 ];
 
+// inv.lang is a composed code ('zh' or 'en-zh'); the UI exposes it as a
+// required primary language plus an optional secondary one.
+function composedLang() {
+  const l1 = form.elements.lang1.value;
+  const l2 = form.elements.lang2.value;
+  return l2 && l2 !== l1 ? `${l1}-${l2}` : l1;
+}
+
+function syncLangSelects() {
+  const [l1, l2 = ''] = String(inv.lang || 'en').split('-');
+  form.elements.lang1.value = l1;
+  form.elements.lang2.value = l2;
+}
+
 function syncFormFromState() {
   for (const name of SCALAR_FIELDS) form.elements[name].value = inv[name] ?? '';
+  syncLangSelects();
   renderItems();
 }
 
@@ -73,6 +88,9 @@ form.addEventListener('input', (e) => {
     inv.items[Number(el.dataset.i)][el.dataset.k] =
       el.dataset.k === 'desc' ? el.value : el.value === '' ? '' : Number(el.value);
     updateItemAmounts();
+  } else if (el.name === 'lang1' || el.name === 'lang2') {
+    if (form.elements.lang2.value === form.elements.lang1.value) form.elements.lang2.value = '';
+    inv.lang = composedLang();
   } else if (SCALAR_FIELDS.includes(el.name)) {
     inv[el.name] = el.type === 'number' ? (el.value === '' ? 0 : Number(el.value)) : el.value;
     if (el.name === 'currency') updateItemAmounts();
