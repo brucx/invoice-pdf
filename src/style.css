@@ -1,6 +1,6 @@
 :root {
   --ink: #18212f;
-  --muted: #6e7887;
+  --muted: #5d6674; /* AA: >=5.1 contrast on #fff/#eef1f6/#f6f8fb */
   --accent: #2563eb;
   --accent-dark: #1d4ed8;
   --bg: #eef1f6;

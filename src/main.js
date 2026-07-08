@@ -44,9 +44,9 @@ function renderItems() {
     const row = document.createElement('div');
     row.className = 'item-row';
     row.innerHTML = `
-      <input type="text" data-i="${i}" data-k="desc" placeholder="Service or product" />
-      <input type="number" data-i="${i}" data-k="qty" min="0" step="any" />
-      <input type="number" data-i="${i}" data-k="price" min="0" step="any" />
+      <input type="text" data-i="${i}" data-k="desc" placeholder="Service or product" aria-label="Item ${i + 1} description" />
+      <input type="number" data-i="${i}" data-k="qty" min="0" step="any" aria-label="Item ${i + 1} quantity" />
+      <input type="number" data-i="${i}" data-k="price" min="0" step="any" aria-label="Item ${i + 1} unit price" />
       <span class="item-amount"></span>
       <button type="button" class="btn-remove" data-remove="${i}" title="Remove item">×</button>
     `;

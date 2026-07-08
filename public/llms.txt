@@ -1,0 +1,19 @@
+# Invoice PDF
+
+> Free in-browser invoice PDF generator at https://invoices-generator.net. Fill out a form, see a live preview, and download a professional A4 invoice PDF. No sign-up, no watermark, no server — the PDF is generated client-side and user data never leaves the browser (drafts autosave to localStorage only).
+
+Key facts:
+- Supports itemized line items (description × quantity × unit price), percentage tax and discount, notes, and 8 currencies (USD, EUR, GBP, CNY, JPY, AUD, CAD, INR).
+- Latin scripts only in the PDF output (built-in Helvetica); CJK is not yet supported.
+- Free with no usage limits; no account or API required.
+
+## Pages
+
+- [Invoice Generator](https://invoices-generator.net/): the main tool — form, live preview, PDF download
+- [Invoice Template PDF](https://invoices-generator.net/invoice-template-pdf): what the template includes and why PDF beats Word/Excel for invoicing
+- [Blank Invoice Template](https://invoices-generator.net/blank-invoice-template): printable blank invoices and when to use them
+- [Freelance Invoice Template](https://invoices-generator.net/freelance-invoice-template): invoicing guidance for freelancers (hourly items, payment terms)
+
+## Source
+
+- [GitHub repository](https://github.com/brucx/invoice-pdf): source code — Vite + jsPDF, hosted on Cloudflare Workers
