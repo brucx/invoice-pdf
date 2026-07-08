@@ -9,6 +9,7 @@ export function defaultInvoice(today = new Date().toISOString().slice(0, 10)) {
     number: 'INV-0001',
     issueDate: today,
     dueDate: '',
+    lang: 'en',
     currency: 'USD',
     taxRate: 0,
     discount: 0,

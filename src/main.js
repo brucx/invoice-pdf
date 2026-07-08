@@ -1,5 +1,6 @@
 import './style.css';
 import { defaultInvoice, computeTotals, formatMoney } from './invoice.js';
+import { labels } from './i18n.js';
 
 const STORAGE_KEY = 'invoice-pdf:draft';
 
@@ -29,7 +30,7 @@ function saveDraft() {
 // --- form <-> state ---
 
 const SCALAR_FIELDS = [
-  'number', 'issueDate', 'dueDate', 'currency', 'taxRate', 'discount',
+  'number', 'issueDate', 'dueDate', 'lang', 'currency', 'taxRate', 'discount',
   'fromName', 'fromDetails', 'toName', 'toDetails', 'notes',
 ];
 
@@ -127,6 +128,7 @@ const escML = (s) => esc(s).replace(/\n/g, '<br>');
 function renderPreview() {
   const { subtotal, discount, tax, total } = computeTotals(inv);
   const money = (v) => formatMoney(v, inv.currency);
+  const L = labels(inv.lang);
   const rows = inv.items
     .filter((it) => it.desc || Number(it.qty) || Number(it.price))
     .map((it) => `
@@ -139,29 +141,29 @@ function renderPreview() {
 
   preview.innerHTML = `
     <div class="pv-head">
-      <div class="pv-title">INVOICE</div>
+      <div class="pv-title">${esc(L.title)}</div>
       <div class="pv-meta">
-        <div><span>Invoice #</span><b>${esc(inv.number) || '—'}</b></div>
-        <div><span>Issue date</span><b>${esc(inv.issueDate) || '—'}</b></div>
-        ${inv.dueDate ? `<div><span>Due date</span><b>${esc(inv.dueDate)}</b></div>` : ''}
+        <div><span>${esc(L.invoiceNo)}</span><b>${esc(inv.number) || '—'}</b></div>
+        <div><span>${esc(L.issueDate)}</span><b>${esc(inv.issueDate) || '—'}</b></div>
+        ${inv.dueDate ? `<div><span>${esc(L.dueDate)}</span><b>${esc(inv.dueDate)}</b></div>` : ''}
       </div>
     </div>
     <hr>
     <div class="pv-parties">
-      <div><h3>From</h3><b>${esc(inv.fromName) || '—'}</b><p>${escML(inv.fromDetails)}</p></div>
-      <div><h3>Bill to</h3><b>${esc(inv.toName) || '—'}</b><p>${escML(inv.toDetails)}</p></div>
+      <div><h3>${esc(L.from)}</h3><b>${esc(inv.fromName) || '—'}</b><p>${escML(inv.fromDetails)}</p></div>
+      <div><h3>${esc(L.billTo)}</h3><b>${esc(inv.toName) || '—'}</b><p>${escML(inv.toDetails)}</p></div>
     </div>
     <table class="pv-table">
-      <thead><tr><th>Description</th><th class="num">Qty</th><th class="num">Unit price</th><th class="num">Amount</th></tr></thead>
+      <thead><tr><th>${esc(L.description)}</th><th class="num">${esc(L.qty)}</th><th class="num">${esc(L.unitPrice)}</th><th class="num">${esc(L.amount)}</th></tr></thead>
       <tbody>${rows || '<tr><td colspan="4" class="pv-empty">No items yet</td></tr>'}</tbody>
     </table>
     <div class="pv-totals">
-      <div><span>Subtotal</span><span>${money(subtotal)}</span></div>
-      ${Number(inv.discount) > 0 ? `<div><span>Discount (${esc(inv.discount)}%)</span><span>-${money(discount)}</span></div>` : ''}
-      ${Number(inv.taxRate) > 0 ? `<div><span>Tax (${esc(inv.taxRate)}%)</span><span>${money(tax)}</span></div>` : ''}
-      <div class="pv-grand"><span>Total due</span><span>${money(total)}</span></div>
+      <div><span>${esc(L.subtotal)}</span><span>${money(subtotal)}</span></div>
+      ${Number(inv.discount) > 0 ? `<div><span>${esc(L.discount)} (${esc(inv.discount)}%)</span><span>-${money(discount)}</span></div>` : ''}
+      ${Number(inv.taxRate) > 0 ? `<div><span>${esc(L.tax)} (${esc(inv.taxRate)}%)</span><span>${money(tax)}</span></div>` : ''}
+      <div class="pv-grand"><span>${esc(L.totalDue)}</span><span>${money(total)}</span></div>
     </div>
-    ${inv.notes ? `<div class="pv-notes"><h3>Notes</h3><p>${escML(inv.notes)}</p></div>` : ''}
+    ${inv.notes ? `<div class="pv-notes"><h3>${esc(L.notes)}</h3><p>${escML(inv.notes)}</p></div>` : ''}
   `;
 }
 

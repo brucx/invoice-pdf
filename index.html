@@ -75,6 +75,11 @@
         "@type": "Question",
         "name": "Can I send the PDF invoice directly to my clients?",
         "acceptedAnswer": { "@type": "Answer", "text": "Yes. The download is a standard A4 PDF that opens in any PDF reader, so you can attach it to an email, share it via a messaging app, or print it." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I make a Chinese, Japanese, or bilingual invoice?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Set Invoice language to Chinese, Japanese, or a bilingual mode (English + Chinese, English + Japanese, Chinese + Japanese) and every label switches language, e.g. \"Amount / 金额\". Simplified Chinese, traditional Chinese, and Japanese all render correctly in the PDF." }
       }
     ]
   }
@@ -97,7 +102,7 @@
 
   <section class="hero">
     <h1>Free Invoice PDF Generator</h1>
-    <p>Create a professional invoice and download it as a PDF in seconds — free, no sign-up, no watermark, and your data never leaves your browser.</p>
+    <p>Create a professional invoice and download it as a PDF in seconds — free, no sign-up, no watermark, and your data never leaves your browser. Now with <a href="/bilingual-invoice-template">bilingual invoices</a> in English, 中文, and 日本語 for cross-border trade.</p>
   </section>
 
   <main class="layout">
@@ -119,6 +124,17 @@
           </label>
         </div>
         <div class="grid-3">
+          <label class="field">
+            <span>Invoice language</span>
+            <select name="lang">
+              <option value="en">English</option>
+              <option value="zh">中文 (Chinese)</option>
+              <option value="ja">日本語 (Japanese)</option>
+              <option value="en-zh">English + 中文</option>
+              <option value="en-ja">English + 日本語</option>
+              <option value="zh-ja">中文 + 日本語</option>
+            </select>
+          </label>
           <label class="field">
             <span>Currency</span>
             <select name="currency">
@@ -276,6 +292,10 @@
           <summary>Can I send the PDF invoice directly to my clients?</summary>
           <p>Yes. The download is a standard A4 PDF that opens in any PDF reader, so you can attach it to an email, share it via a messaging app, or print it.</p>
         </details>
+        <details>
+          <summary>Can I make a Chinese, Japanese, or bilingual invoice?</summary>
+          <p>Yes. Set <em>Invoice language</em> to 中文, 日本語, or a bilingual mode (English + 中文, English + 日本語, 中文 + 日本語) and every label — including the title — switches language, e.g. "Amount / 金额". See the <a href="/bilingual-invoice-template">bilingual invoice template</a> page for details.</p>
+        </details>
       </section>
 
     </div>
@@ -287,6 +307,7 @@
       <a href="/invoice-template-pdf">Invoice Template PDF</a>
       <a href="/blank-invoice-template">Blank Invoice Template</a>
       <a href="/freelance-invoice-template">Freelance Invoice Template</a>
+      <a href="/bilingual-invoice-template">Bilingual Invoice Template</a>
     </nav>
     <p>Runs 100% in your browser — nothing is uploaded, your data stays on your device.</p>
   </footer>

@@ -4,7 +4,8 @@
 
 Key facts:
 - Supports itemized line items (description × quantity × unit price), percentage tax and discount, notes, and 8 currencies (USD, EUR, GBP, CNY, JPY, AUD, CAD, INR).
-- Latin scripts only in the PDF output (built-in Helvetica); CJK is not yet supported.
+- Invoice-content languages: English, Chinese, Japanese, and bilingual modes (EN+ZH, EN+JA, ZH+JA) with dual-language labels like "Amount / 金额". Simplified Chinese, traditional Chinese, and Japanese render in the PDF via an embedded, per-document-subsetted Noto Sans font.
+- Produces commercial/proforma invoices — NOT a Chinese tax fapiao (发票) and not a Japanese qualified invoice (適格請求書).
 - Free with no usage limits; no account or API required.
 
 ## Pages
@@ -13,6 +14,7 @@ Key facts:
 - [Invoice Template PDF](https://invoices-generator.net/invoice-template-pdf): what the template includes and why PDF beats Word/Excel for invoicing
 - [Blank Invoice Template](https://invoices-generator.net/blank-invoice-template): printable blank invoices and when to use them
 - [Freelance Invoice Template](https://invoices-generator.net/freelance-invoice-template): invoicing guidance for freelancers (hourly items, payment terms)
+- [Bilingual Invoice Template](https://invoices-generator.net/bilingual-invoice-template): dual-language invoices (EN/ZH/JA) for cross-border trade, incl. the fapiao distinction
 
 ## Source
 
