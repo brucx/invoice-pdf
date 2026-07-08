@@ -1,6 +1,5 @@
 import './style.css';
 import { defaultInvoice, computeTotals, formatMoney } from './invoice.js';
-import { downloadPdf } from './pdf.js';
 
 const STORAGE_KEY = 'invoice-pdf:draft';
 
@@ -107,7 +106,17 @@ document.getElementById('btn-reset').addEventListener('click', () => {
   renderPreview();
 });
 
-document.getElementById('btn-download').addEventListener('click', () => downloadPdf(inv));
+// jsPDF is ~85% of the bundle; load it only when the user actually downloads.
+const btnDownload = document.getElementById('btn-download');
+btnDownload.addEventListener('click', async () => {
+  btnDownload.disabled = true;
+  try {
+    const { downloadPdf } = await import('./pdf.js');
+    downloadPdf(inv);
+  } finally {
+    btnDownload.disabled = false;
+  }
+});
 
 // --- live preview ---
 

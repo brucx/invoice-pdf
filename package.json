@@ -15,6 +15,7 @@
     "jspdf-autotable": "^5.0.2"
   },
   "devDependencies": {
+    "sharp": "^0.35.3",
     "vite": "^7.0.0",
     "wrangler": "^4.108.0"
   }
