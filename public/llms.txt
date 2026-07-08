@@ -3,8 +3,8 @@
 > Free in-browser invoice PDF generator at https://invoices-generator.net. Fill out a form, see a live preview, and download a professional A4 invoice PDF. No sign-up, no watermark, no server — the PDF is generated client-side and user data never leaves the browser (drafts autosave to localStorage only).
 
 Key facts:
-- Supports itemized line items (description × quantity × unit price), percentage tax and discount, notes, and 8 currencies (USD, EUR, GBP, CNY, JPY, AUD, CAD, INR).
-- Invoice-content languages: English, Chinese, Japanese, and bilingual modes (EN+ZH, EN+JA, ZH+JA) with dual-language labels like "Amount / 金额". Simplified Chinese, traditional Chinese, and Japanese render in the PDF via an embedded, per-document-subsetted Noto Sans font.
+- Supports itemized line items (description × quantity × unit price), percentage tax and discount, notes, and 12 currencies (USD, EUR, GBP, CNY, JPY, AUD, CAD, INR, KRW, VND, IDR, SGD) with correct decimal and symbol-placement rules.
+- Invoice-content languages: English, Chinese, Japanese, Korean, Vietnamese, Spanish, German, French, Indonesian — pick a primary language plus an optional second one for dual-language labels like "Amount / 金额". Simplified/traditional Chinese, Japanese, Korean Hangul, and Vietnamese diacritics render in the PDF via embedded, per-document-subsetted Noto Sans fonts, with per-word font fallback for mixed-script lines.
 - Produces commercial/proforma invoices — NOT a Chinese tax fapiao (发票) and not a Japanese qualified invoice (適格請求書).
 - Free with no usage limits; no account or API required.
 
@@ -14,7 +14,13 @@ Key facts:
 - [Invoice Template PDF](https://invoices-generator.net/invoice-template-pdf): what the template includes and why PDF beats Word/Excel for invoicing
 - [Blank Invoice Template](https://invoices-generator.net/blank-invoice-template): printable blank invoices and when to use them
 - [Freelance Invoice Template](https://invoices-generator.net/freelance-invoice-template): invoicing guidance for freelancers (hourly items, payment terms)
-- [Bilingual Invoice Template](https://invoices-generator.net/bilingual-invoice-template): dual-language invoices (EN/ZH/JA) for cross-border trade, incl. the fapiao distinction
+- [Bilingual Invoice Template](https://invoices-generator.net/bilingual-invoice-template): dual-language invoices for cross-border trade, incl. the fapiao distinction
+- [Korean Invoice Template](https://invoices-generator.net/korean-invoice-template): 청구서 / bilingual Korean invoices (not a Hometax 세금계산서)
+- [Vietnamese Invoice Template](https://invoices-generator.net/vietnamese-invoice-template): hóa đơn thương mại / bilingual Vietnamese invoices (not a hóa đơn điện tử)
+- [Spanish Invoice Template](https://invoices-generator.net/spanish-invoice-template): factura / bilingual Spanish invoices (not a CFDI/DTE fiscal document)
+- [German Invoice Template](https://invoices-generator.net/german-invoice-template): Rechnung / bilingual German invoices (visual PDF, not XRechnung)
+- [French Invoice Template](https://invoices-generator.net/french-invoice-template): facture / bilingual French invoices (not a PDP structured e-invoice)
+- [Indonesian Invoice Template](https://invoices-generator.net/indonesian-invoice-template): faktur / bilingual Indonesian invoices (not a Faktur Pajak)
 
 ## Source
 

@@ -1,4 +1,6 @@
 // Runtime smoke test: generate real PDFs in Node across languages and sanity-check bytes.
+// min/max bound the PDF size: embedded font subsets push CJK cases well past
+// Helvetica-only output, so the bounds catch "font silently not embedded".
 import { readFile } from 'node:fs/promises';
 import { buildPdf } from '../src/pdf.js';
 import { computeTotals } from '../src/invoice.js';
@@ -26,11 +28,12 @@ const base = {
 };
 
 const CASES = [
-  { lang: 'en', inv: base, wantFont: null },
+  { lang: 'en', inv: base, max: 15_000 },
+  { lang: 'es', inv: { ...base, notes: 'Pago por transferencia. ¡Gracias! Año fiscal 2026.' }, max: 15_000 },
   {
     lang: 'zh',
     inv: {
-      ...base, lang: 'zh', currency: 'CNY',
+      ...base, currency: 'CNY',
       fromName: '深圳市恒发贸易有限公司',
       fromDetails: '广东省深圳市福田区深南大道 1000 号\ninfo@hengfa.example.cn',
       toName: 'Müller GmbH',
@@ -40,29 +43,68 @@ const CASES = [
       ],
       notes: '付款方式：电汇 T/T。收到货款后 15 个工作日内发货。',
     },
-    wantFont: 'NotoSansSC',
+    min: 20_000,
   },
+  { lang: 'en-zh', inv: { ...base, toName: '上海进出口有限公司' }, min: 20_000 },
   {
-    lang: 'en-zh',
-    inv: { ...base, lang: 'en-zh', toName: '上海进出口有限公司' },
-    wantFont: 'NotoSansSC',
-  },
-  {
-    lang: 'ja-en', // reversed order: primary ja + secondary en, exercises the JP font
-    inv: { ...base, lang: 'ja-en', fromName: '株式会社山田商事', notes: 'お支払いは銀行振込でお願いします。' },
-    wantFont: 'NotoSansJP',
+    lang: 'ja-en',
+    inv: { ...base, fromName: '株式会社山田商事', notes: 'お支払いは銀行振込でお願いします。' },
+    min: 20_000,
   },
   {
     lang: 'zh-ja',
     inv: {
-      ...base, lang: 'zh-ja', currency: 'JPY',
+      ...base, currency: 'JPY',
       fromName: '株式会社山田商事',
       fromDetails: '東京都千代田区丸の内1-1-1',
       toName: '北京商贸有限公司',
       items: [{ desc: '電子部品 电子元件 A-100', qty: 1000, price: 120 }],
       notes: 'お支払いは銀行振込でお願いします。',
     },
-    wantFont: 'NotoSansSC',
+    min: 20_000,
+  },
+  {
+    lang: 'ko',
+    inv: {
+      ...base, currency: 'KRW',
+      fromName: '주식회사 한빛무역',
+      fromDetails: '서울특별시 강남구 테헤란로 123\ntrade@hanbit.example.kr',
+      toName: 'Pacific Imports LLC',
+      items: [{ desc: '화장품 세트 (기획전용)', qty: 200, price: 45000 }],
+      notes: '결제는 계좌이체로 부탁드립니다.',
+    },
+    min: 15_000,
+  },
+  {
+    lang: 'vi',
+    inv: {
+      ...base, currency: 'VND',
+      fromName: 'Công ty TNHH Thương mại Hòa Phát',
+      fromDetails: 'Số 25 Lý Thường Kiệt, Hoàn Kiếm, Hà Nội',
+      toName: '深圳市恒发贸易有限公司',
+      items: [{ desc: 'Cà phê hạt rang xay đặc biệt', qty: 1000, price: 250000 }],
+      notes: 'Thanh toán chuyển khoản trong vòng 14 ngày.',
+    },
+    min: 15_000, // Vietnamese labels + the Chinese buyer name pull in NotoSans + SC
+  },
+  {
+    // Mixed-script pair: Korean labels/content + Chinese content in one document.
+    lang: 'zh-ko',
+    inv: {
+      ...base,
+      fromName: '青岛出口贸易有限公司',
+      toName: '주식회사 서울상사',
+      items: [{ desc: '农产品 농산물 A급', qty: 50, price: 900 }],
+      notes: '감사합니다 谢谢惠顾',
+    },
+    min: 30_000,
+  },
+  {
+    // Regression: Chinese content on an English invoice must not crash Helvetica.
+    lang: 'en',
+    label: 'en+cjk-content',
+    inv: { ...base, fromName: '深圳市恒发贸易有限公司 Hengfa Trading' },
+    min: 20_000,
   },
 ];
 
@@ -73,14 +115,11 @@ const expectTotal = expectSubtotal * 0.9 * 1.085;
 if (Math.abs(totals.subtotal - expectSubtotal) > 0.001) throw new Error(`subtotal wrong: ${totals.subtotal}`);
 if (Math.abs(totals.total - expectTotal) > 0.001) throw new Error(`total wrong: ${totals.total}`);
 
-for (const { lang, inv, wantFont } of CASES) {
+for (const { lang, inv, min = 2_000, max = 500_000, label = lang } of CASES) {
   const bytes = Buffer.from(await buildPdf({ ...inv, lang }, { loadFont, loadWasm }));
-  if (!bytes.subarray(0, 5).equals(Buffer.from('%PDF-'))) throw new Error(`${lang}: not a PDF`);
-  if (bytes.length < 2000) throw new Error(`${lang}: suspiciously small (${bytes.length}B)`);
-  if (bytes.length > 500_000) throw new Error(`${lang}: too large (${bytes.length}B) — font subsetting broken?`);
-  // CJK cases embed a TrueType subset (>=20KB); latin-only stays tiny on Helvetica.
-  if (wantFont && bytes.length < 15_000) throw new Error(`${lang}: too small (${bytes.length}B) — CJK font not embedded?`);
-  if (!wantFont && bytes.length > 15_000) throw new Error(`${lang}: too large (${bytes.length}B) — unexpected font embedded?`);
-  console.log(`smoke OK [${lang}]: ${(bytes.length / 1024).toFixed(1)} KB`);
+  if (!bytes.subarray(0, 5).equals(Buffer.from('%PDF-'))) throw new Error(`${label}: not a PDF`);
+  if (bytes.length < min) throw new Error(`${label}: too small (${bytes.length}B < ${min}) — font not embedded?`);
+  if (bytes.length > max) throw new Error(`${label}: too large (${bytes.length}B > ${max}) — subsetting broken?`);
+  console.log(`smoke OK [${label}]: ${(bytes.length / 1024).toFixed(1)} KB`);
 }
 console.log('all smoke cases passed');

@@ -53,6 +53,108 @@ const STRINGS = {
     totalDue: '合計金額',
     notes: '備考',
   },
+  ko: {
+    title: '청구서',
+    invoiceNo: '청구서 번호',
+    issueDate: '발행일',
+    dueDate: '지급 기한',
+    from: '공급자',
+    billTo: '구매자',
+    description: '품목',
+    qty: '수량',
+    unitPrice: '단가',
+    amount: '금액',
+    subtotal: '소계',
+    discount: '할인',
+    tax: '세액',
+    totalDue: '합계 금액',
+    notes: '비고',
+  },
+  vi: {
+    title: 'HÓA ĐƠN THƯƠNG MẠI',
+    invoiceNo: 'Số hóa đơn',
+    issueDate: 'Ngày lập',
+    dueDate: 'Hạn thanh toán',
+    from: 'Bên bán',
+    billTo: 'Bên mua',
+    description: 'Mô tả',
+    qty: 'Số lượng',
+    unitPrice: 'Đơn giá',
+    amount: 'Thành tiền',
+    subtotal: 'Tạm tính',
+    discount: 'Chiết khấu',
+    tax: 'Thuế',
+    totalDue: 'Tổng thanh toán',
+    notes: 'Ghi chú',
+  },
+  es: {
+    title: 'FACTURA',
+    invoiceNo: 'N.º de factura',
+    issueDate: 'Fecha de emisión',
+    dueDate: 'Vencimiento',
+    from: 'Emisor',
+    billTo: 'Facturar a',
+    description: 'Descripción',
+    qty: 'Cant.',
+    unitPrice: 'Precio unitario',
+    amount: 'Importe',
+    subtotal: 'Subtotal',
+    discount: 'Descuento',
+    tax: 'Impuestos',
+    totalDue: 'Total a pagar',
+    notes: 'Notas',
+  },
+  de: {
+    title: 'RECHNUNG',
+    invoiceNo: 'Rechnungsnr.',
+    issueDate: 'Rechnungsdatum',
+    dueDate: 'Fällig am',
+    from: 'Von',
+    billTo: 'Rechnung an',
+    description: 'Beschreibung',
+    qty: 'Menge',
+    unitPrice: 'Einzelpreis',
+    amount: 'Betrag',
+    subtotal: 'Zwischensumme',
+    discount: 'Rabatt',
+    tax: 'Steuer',
+    totalDue: 'Gesamtbetrag',
+    notes: 'Anmerkungen',
+  },
+  fr: {
+    title: 'FACTURE',
+    invoiceNo: 'N° de facture',
+    issueDate: "Date d'émission",
+    dueDate: "Date d'échéance",
+    from: 'Émetteur',
+    billTo: 'Facturé à',
+    description: 'Description',
+    qty: 'Qté',
+    unitPrice: 'Prix unitaire',
+    amount: 'Montant',
+    subtotal: 'Sous-total',
+    discount: 'Remise',
+    tax: 'Taxe',
+    totalDue: 'Total à payer',
+    notes: 'Notes',
+  },
+  id: {
+    title: 'FAKTUR',
+    invoiceNo: 'No. Faktur',
+    issueDate: 'Tanggal terbit',
+    dueDate: 'Jatuh tempo',
+    from: 'Dari',
+    billTo: 'Ditagihkan kepada',
+    description: 'Deskripsi',
+    qty: 'Jml',
+    unitPrice: 'Harga satuan',
+    amount: 'Jumlah',
+    subtotal: 'Subtotal',
+    discount: 'Diskon',
+    tax: 'Pajak',
+    totalDue: 'Total tagihan',
+    notes: 'Catatan',
+  },
 };
 
 // labels('en-zh').invoiceNo === 'Invoice # / 发票编号'
@@ -66,13 +168,6 @@ export function labels(lang) {
   return out;
 }
 
-// True if the selected language needs a CJK-capable font in the PDF.
-export function needsCjk(lang) {
-  return /zh|ja/.test(String(lang || ''));
-}
-
-// Which embedded font family covers this language selection.
-export function fontFamily(lang) {
-  if (!needsCjk(lang)) return 'latin';
-  return /zh/.test(lang) ? 'sc' : 'jp'; // zh-ja uses SC (JP glyph variants acceptable)
-}
+// Embedded font family each language's labels require (undefined = built-in
+// Helvetica is enough). Font planning lives in pdf.js.
+export const LANG_FONT = { zh: 'sc', ja: 'jp', ko: 'kr', vi: 'vn' };

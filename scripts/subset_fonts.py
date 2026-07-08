@@ -24,7 +24,10 @@ OUT.mkdir(parents=True, exist_ok=True)
 
 COMMON = set(chr(c) for c in range(0x20, 0x7F))          # ASCII
 COMMON |= set(chr(c) for c in range(0xA0, 0x100))        # Latin-1
-COMMON |= set('–—‘’“”†‡•…‰′″‹›€™©®°±×÷')                  # common punct/symbols
+COMMON |= set(chr(c) for c in range(0x100, 0x250))       # Latin Ext-A/B (vi, eu names)
+COMMON |= set(chr(c) for c in range(0x1E00, 0x1F00))     # Latin Ext Additional (vi)
+COMMON |= set(chr(c) for c in range(0x20A0, 0x20D0))     # currency symbols (₩ ₫ ₹ €)
+COMMON |= set('–—‘’“”†‡•…‰′″‹›™©®°±×÷')                   # common punct/symbols
 COMMON |= set(chr(c) for c in range(0x3000, 0x3040))     # CJK punctuation
 COMMON |= set(chr(c) for c in range(0xFF00, 0xFFF0))     # fullwidth forms
 
@@ -64,11 +67,27 @@ def jis_chars():
     return chars
 
 
+def hangul_chars():
+    chars = set(chr(c) for c in range(0x3130, 0x3190))   # compat jamo
+    for cp in range(0xAC00, 0xD7A4):                     # KS X 1001 syllables
+        ch = chr(cp)
+        try:
+            ch.encode('euc_kr')
+            chars.add(ch)
+        except UnicodeEncodeError:
+            pass
+    return chars
+
+
 # SC also covers JIS + Big5 codepoints (mainland glyph style): it serves the
 # zh-ja bilingual mode and traditional-Chinese input, which GB2312 alone lacks.
+# NotoSans (plain) is the small Latin/Vietnamese font for invoices without CJK.
+# Extra axes beyond wght (NotoSans has wdth) are pinned to their defaults.
 JOBS = [
     ('NotoSansSC-var.ttf', 'NotoSansSC', lambda: gb2312_chars() | jis_chars() | big5_chars()),
     ('NotoSansJP-var.ttf', 'NotoSansJP', jis_chars),
+    ('NotoSansKR-var.ttf', 'NotoSansKR', hangul_chars),
+    ('NotoSans-var.ttf', 'NotoSans', set),
 ]
 WEIGHTS = [('Regular', 400), ('Bold', 700)]
 
@@ -77,11 +96,14 @@ with tempfile.TemporaryDirectory() as tmp:
         chars = COMMON | extra()
         text_file = Path(tmp) / f'{family}.chars.txt'
         text_file.write_text(''.join(sorted(chars)), encoding='utf-8')
+        from fontTools.ttLib import TTFont
+        axes = [a.axisTag for a in TTFont(str(SRC / var_name), lazy=True)['fvar'].axes]
         for weight_name, wght in WEIGHTS:
             static = Path(tmp) / f'{family}-{weight_name}.ttf'
+            extra = [f'{a}=drop' for a in axes if a != 'wght']
             subprocess.run([
                 'python3', '-m', 'fontTools.varLib.instancer',
-                str(SRC / var_name), f'wght={wght}', '-o', str(static), '--quiet',
+                str(SRC / var_name), f'wght={wght}', *extra, '-o', str(static), '--quiet',
             ], check=True)
             out = OUT / f'{family}-{weight_name}.ttf'
             subprocess.run([

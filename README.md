@@ -2,14 +2,14 @@
 
 Free in-browser invoice generator at [invoices-generator.net](https://invoices-generator.net). Fill in the form, see a live preview, download a professional PDF — no sign-up, no server, your data never leaves the device (drafts autosave to `localStorage`).
 
-Supports multilingual invoice content for cross-border trade: English, Chinese, Japanese, and bilingual modes (EN+ZH, EN+JA, ZH+JA) with dual-language labels like "Amount / 金额".
+Supports multilingual invoice content for cross-border trade: English, Chinese, Japanese, Korean, Vietnamese, Spanish, German, French, and Indonesian — a primary language plus an optional second one gives dual-language labels like "Amount / 金额", with per-word font fallback so scripts can mix within a line.
 
 ## Stack
 
 - Vanilla JS + [Vite](https://vitejs.dev/) — static MPA build, no framework
 - [pdf-lib](https://pdf-lib.js.org/) + fontkit — client-side PDF generation
 - [HarfBuzz wasm](https://github.com/harfbuzz/harfbuzzjs) — per-document font subsetting (`src/subset.js`); fontkit's own `subset: true` corrupts CJK glyphs, so fonts are HB-subsetted to the invoice's exact characters and embedded whole
-- Noto Sans SC/JP pre-subsets in `public/fonts/` (SC: GB2312 ∪ JIS ∪ Big5; JP: JIS) — regenerate with `scripts/subset_fonts.py` (needs `fonttools`)
+- Noto Sans SC/JP/KR + Noto Sans pre-subsets in `public/fonts/` (SC: GB2312 ∪ JIS ∪ Big5; JP: JIS; KR: KS X 1001 Hangul; NotoSans: Latin-Ext/Vietnamese) — regenerate with `scripts/subset_fonts.py` (needs `fonttools`)
 - Cloudflare Workers static assets — hosting (`wrangler.jsonc`; tiny worker entry for www→apex 301)
 
 ## Develop
@@ -36,6 +36,6 @@ npm run deploy   # vite build && wrangler deploy
 
 ## Known limitations
 
-- Generates commercial/proforma invoices — not a Chinese tax fapiao (发票), not a Japanese qualified invoice (適格請求書).
-- Characters outside GB2312/Big5/JIS (rare ideographs, emoji) won't render in the PDF.
+- Generates commercial/proforma invoices — not a Chinese tax fapiao (发票), Japanese qualified invoice (適格請求書), Korean 세금계산서, Vietnamese hóa đơn điện tử, or Indonesian Faktur Pajak.
+- Characters outside GB2312/Big5/JIS/KS X 1001 (rare ideographs, rare Hangul syllables, emoji) won't render in the PDF. RTL scripts (Arabic/Hebrew) and shaped scripts (Thai/Hindi) are unsupported.
 - Single fixed template; no logo upload yet.
