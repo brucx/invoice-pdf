@@ -130,7 +130,7 @@ function renderPreview() {
 
   preview.innerHTML = `
     <div class="pv-head">
-      <h1>INVOICE</h1>
+      <div class="pv-title">INVOICE</div>
       <div class="pv-meta">
         <div><span>Invoice #</span><b>${esc(inv.number) || '—'}</b></div>
         <div><span>Issue date</span><b>${esc(inv.issueDate) || '—'}</b></div>

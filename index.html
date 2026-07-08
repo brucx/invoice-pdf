@@ -27,6 +27,54 @@
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is this invoice generator really free?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every feature — line items, tax, discounts, currencies, the live preview, and PDF download — is free with no sign-up and no watermark. There is no paid tier." }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is my invoice data stored?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Only in your browser. The invoice PDF is generated locally on your device and drafts are saved to your browser's local storage. Nothing is uploaded to a server, and we never see your clients or amounts." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I create an invoice PDF?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Fill in your details, your client's details, and at least one line item, then click Download PDF. The whole process takes under a minute, and the live preview shows exactly what the PDF will look like." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I add tax or a discount to my invoice?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Set a percentage tax rate and an optional percentage discount in the invoice details. The discount is applied to the subtotal first, then tax is calculated on the discounted amount." }
+      },
+      {
+        "@type": "Question",
+        "name": "Which currencies are supported?",
+        "acceptedAnswer": { "@type": "Answer", "text": "USD, EUR, GBP, CNY, JPY, AUD, CAD, and INR. The currency symbol and number formatting are applied consistently across the preview and the downloaded PDF." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I edit or reuse a previous invoice?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Your latest invoice is saved automatically in your browser on the same device. Reopen the site, bump the invoice number, adjust the line items, and download the new PDF — ideal for repeat clients." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to install anything or create an account?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. It works in any modern browser on desktop or mobile with nothing to install and no account required." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I send the PDF invoice directly to my clients?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. The download is a standard A4 PDF that opens in any PDF reader, so you can attach it to an email, share it via a messaging app, or print it." }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <header class="topbar">
@@ -42,6 +90,11 @@
       <button id="btn-download" class="btn btn-primary" type="button">Download PDF</button>
     </div>
   </header>
+
+  <section class="hero">
+    <h1>Free Invoice PDF Generator</h1>
+    <p>Create a professional invoice and download it as a PDF in seconds — free, no sign-up, no watermark, and your data never leaves your browser.</p>
+  </section>
 
   <main class="layout">
     <form id="invoice-form" class="panel form-panel" autocomplete="off">
@@ -133,6 +186,96 @@
       <div id="preview" class="paper" aria-label="Invoice preview"></div>
     </aside>
   </main>
+
+  <section class="content">
+    <div class="content-inner">
+
+      <section class="seo-block">
+        <h2>How to make an invoice PDF in 3 steps</h2>
+        <ol class="steps">
+          <li>
+            <h3>1. Fill in the details</h3>
+            <p>Enter your business name, your client's information, and an invoice number. Add line items with a description, quantity, and unit price — the subtotal, tax, and total are calculated for you as you type.</p>
+          </li>
+          <li>
+            <h3>2. Check the live preview</h3>
+            <p>The invoice preview updates instantly, so what you see is exactly what your client gets. Adjust the tax rate, apply a discount, or switch between eight currencies — including USD, EUR, GBP, and JPY.</p>
+          </li>
+          <li>
+            <h3>3. Download your PDF</h3>
+            <p>Click <em>Download PDF</em> and a clean, professional A4 invoice is generated right in your browser, ready to email to your client or keep for your records.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="seo-block">
+        <h2>Why use this invoice generator?</h2>
+        <div class="features">
+          <div class="feature">
+            <h3>Completely free</h3>
+            <p>No sign-up, no trial, no watermark, no hidden plan. Make as many invoices as you need — this tool is free for freelancers, contractors, and small businesses alike.</p>
+          </div>
+          <div class="feature">
+            <h3>Private by design</h3>
+            <p>Unlike most online invoice makers, nothing you type is sent to a server. The PDF is generated entirely in your browser, so client names, amounts, and bank details stay on your device.</p>
+          </div>
+          <div class="feature">
+            <h3>Drafts saved automatically</h3>
+            <p>Your invoice is saved in your browser as you type. Close the tab, come back later, and pick up where you left off — handy for recurring monthly invoices.</p>
+          </div>
+          <div class="feature">
+            <h3>Tax, discounts &amp; currencies</h3>
+            <p>Add a percentage-based tax rate and discount, and bill in USD, EUR, GBP, CNY, JPY, AUD, CAD, or INR with correct formatting on both the preview and the PDF.</p>
+          </div>
+          <div class="feature">
+            <h3>Professional layout</h3>
+            <p>A clean A4 invoice template with your details, itemized charges, and a clear total due — the kind of invoice that gets paid without follow-up questions.</p>
+          </div>
+          <div class="feature">
+            <h3>Works everywhere</h3>
+            <p>Nothing to install and no account to create. It runs in any modern browser on desktop, tablet, or phone — even on a slow connection, because there's no server round-trip.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="seo-block">
+        <h2>Frequently asked questions</h2>
+        <details>
+          <summary>Is this invoice generator really free?</summary>
+          <p>Yes. Every feature — line items, tax, discounts, currencies, the live preview, and PDF download — is free with no sign-up and no watermark. There is no paid tier.</p>
+        </details>
+        <details>
+          <summary>Where is my invoice data stored?</summary>
+          <p>Only in your browser. The invoice PDF is generated locally on your device and drafts are saved to your browser's local storage. Nothing is uploaded to a server, and we never see your clients or amounts.</p>
+        </details>
+        <details>
+          <summary>How do I create an invoice PDF?</summary>
+          <p>Fill in your details, your client's details, and at least one line item, then click <em>Download PDF</em>. The whole process takes under a minute, and the live preview shows exactly what the PDF will look like.</p>
+        </details>
+        <details>
+          <summary>Can I add tax or a discount to my invoice?</summary>
+          <p>Yes. Set a percentage tax rate and an optional percentage discount in the invoice details. The discount is applied to the subtotal first, then tax is calculated on the discounted amount.</p>
+        </details>
+        <details>
+          <summary>Which currencies are supported?</summary>
+          <p>USD, EUR, GBP, CNY, JPY, AUD, CAD, and INR. The currency symbol and number formatting are applied consistently across the preview and the downloaded PDF.</p>
+        </details>
+        <details>
+          <summary>Can I edit or reuse a previous invoice?</summary>
+          <p>Your latest invoice is saved automatically in your browser on the same device. Reopen the site, bump the invoice number, adjust the line items, and download the new PDF — ideal for repeat clients.</p>
+        </details>
+        <details>
+          <summary>Do I need to install anything or create an account?</summary>
+          <p>No. It works in any modern browser on desktop or mobile with nothing to install and no account required.</p>
+        </details>
+        <details>
+          <summary>Can I send the PDF invoice directly to my clients?</summary>
+          <p>Yes. The download is a standard A4 PDF that opens in any PDF reader, so you can attach it to an email, share it via a messaging app, or print it.</p>
+        </details>
+      </section>
+
+    </div>
+  </section>
 
   <footer class="footer">
     <p>Runs 100% in your browser — nothing is uploaded, your data stays on your device.</p>

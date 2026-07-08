@@ -59,6 +59,24 @@ body {
 .btn-ghost { background: transparent; color: var(--muted); }
 .btn-ghost:hover { background: #eceff4; color: var(--ink); }
 
+/* --- hero --- */
+.hero {
+  max-width: 1280px;
+  margin: 28px auto 0;
+  padding: 0 24px;
+}
+.hero h1 {
+  margin: 0 0 6px;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+}
+.hero p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 640px;
+}
+
 /* --- layout --- */
 .layout {
   display: grid;
@@ -162,7 +180,7 @@ body {
   min-height: 640px;
 }
 .pv-head { display: flex; justify-content: space-between; align-items: flex-start; }
-.pv-head h1 { margin: 0; font-size: 26px; letter-spacing: 0.01em; }
+.pv-head .pv-title { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: 0.01em; }
 .pv-meta { text-align: right; font-size: 12.5px; }
 .pv-meta div { display: flex; gap: 16px; justify-content: flex-end; margin-bottom: 3px; }
 .pv-meta span { color: var(--muted); }
@@ -202,6 +220,56 @@ body {
 .pv-grand span { color: var(--ink) !important; }
 .pv-notes { margin-top: 24px; }
 .pv-notes p { margin: 0; color: var(--muted); font-size: 12.5px; white-space: pre-line; }
+
+/* --- content sections --- */
+.content {
+  background: #fff;
+  border-top: 1px solid var(--rule);
+  margin-top: 40px;
+}
+.content-inner {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 16px 24px 48px;
+}
+.seo-block { margin-top: 44px; }
+.seo-block h2 {
+  margin: 0 0 20px;
+  font-size: 21px;
+  letter-spacing: -0.01em;
+}
+.seo-block h3 { margin: 0 0 6px; font-size: 15px; }
+.seo-block p { margin: 0; color: var(--muted); font-size: 14px; }
+
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px 24px;
+}
+@media (max-width: 780px) {
+  .steps, .features { grid-template-columns: 1fr; }
+}
+
+.seo-block details {
+  border-bottom: 1px solid var(--rule);
+  padding: 12px 0;
+}
+.seo-block summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14.5px;
+  list-style-position: outside;
+}
+.seo-block summary:hover { color: var(--accent); }
+.seo-block details p { margin: 10px 0 2px; }
 
 .footer {
   text-align: center;
