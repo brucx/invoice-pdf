@@ -2,7 +2,7 @@
 
 export const CURRENCY_SYMBOLS = {
   USD: '$', EUR: '€', GBP: '£', CNY: '¥', JPY: '¥', AUD: '$', CAD: '$', INR: '₹',
-  KRW: '₩', VND: '₫', IDR: 'Rp ', SGD: 'S$',
+  KRW: '₩', VND: '₫', IDR: 'Rp ', SGD: 'S$', BRL: 'R$',
 };
 
 const ZERO_DECIMAL = new Set(['JPY', 'KRW', 'VND', 'IDR']);

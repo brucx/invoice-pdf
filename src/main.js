@@ -1,6 +1,6 @@
 import './style.css';
 import { defaultInvoice, computeTotals, formatMoney } from './invoice.js';
-import { labels } from './i18n.js';
+import { labels, LANGS } from './i18n.js';
 
 const STORAGE_KEY = 'invoice-pdf:draft';
 
@@ -9,6 +9,16 @@ const itemsList = document.getElementById('items-list');
 const preview = document.getElementById('preview');
 
 let inv = loadDraft();
+
+// Landing pages deep-link with ?lang=de or ?lang=en-zh to preselect the
+// invoice language; the rest of the draft is left untouched.
+const urlLang = new URLSearchParams(location.search).get('lang');
+if (urlLang) {
+  const parts = urlLang.split('-');
+  if (parts.length <= 2 && new Set(parts).size === parts.length && parts.every((p) => LANGS.includes(p))) {
+    inv.lang = urlLang;
+  }
+}
 
 function loadDraft() {
   try {

@@ -30,6 +30,9 @@ const base = {
 const CASES = [
   { lang: 'en', inv: base, max: 15_000 },
   { lang: 'es', inv: { ...base, notes: 'Pago por transferencia. ¡Gracias! Año fiscal 2026.' }, max: 15_000 },
+  { lang: 'nl', inv: { ...base, notes: 'Betaling binnen 14 dagen. Bedankt!' }, max: 15_000 },
+  { lang: 'it', inv: { ...base, notes: 'Pagamento entro 14 giorni. Già fatturato più volte.' }, max: 15_000 },
+  { lang: 'pt-en', inv: { ...base, currency: 'BRL', notes: 'Pagamento em até 14 dias. Obrigado!' }, max: 15_000 },
   {
     lang: 'zh',
     inv: {

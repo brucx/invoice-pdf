@@ -2,7 +2,7 @@
 
 Free in-browser invoice generator at [invoices-generator.net](https://invoices-generator.net). Fill in the form, see a live preview, download a professional PDF — no sign-up, no server, your data never leaves the device (drafts autosave to `localStorage`).
 
-Supports multilingual invoice content for cross-border trade: English, Chinese, Japanese, Korean, Vietnamese, Spanish, German, French, and Indonesian — a primary language plus an optional second one gives dual-language labels like "Amount / 金额", with per-word font fallback so scripts can mix within a line.
+Supports multilingual invoice content for cross-border trade in 12 languages (en/zh/ja/ko/vi/es/de/fr/nl/it/pt/id) — a primary language plus an optional second one gives dual-language labels like "Amount / 金额", with per-word font fallback so scripts can mix within a line. Landing pages deep-link with `?lang=` to preselect. Localized landing pages live at `<language>-invoice-template.html`.
 
 ## Stack
 
