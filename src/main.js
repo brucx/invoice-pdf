@@ -146,7 +146,7 @@ btnDownload.addEventListener('click', async () => {
     if (typeof gtag === 'function') {
       gtag('event', 'pdf_download', {
         invoice_language: inv.lang,
-        currency: inv.currency,
+        invoice_currency: inv.currency, // 'currency' is a GA4 reserved param
         line_items: inv.items.length,
       });
     }
