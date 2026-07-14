@@ -54,15 +54,19 @@
       var done = false;
       function load() {
         if (done) return; done = true;
-        var s = document.createElement('script');
-        s.async = true;
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-89C4DM8EX9';
-        document.head.appendChild(s);
+        var inject = function () {
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-89C4DM8EX9';
+          document.head.appendChild(s);
+        };
+        if ('requestIdleCallback' in window) requestIdleCallback(inject, { timeout: 3000 });
+        else setTimeout(inject, 200);
       }
       ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (e) {
         addEventListener(e, load, { once: true, passive: true });
       });
-      setTimeout(load, 4000);
+      setTimeout(load, 10000);
     })();
   </script>
 </head>
