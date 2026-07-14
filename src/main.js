@@ -135,13 +135,21 @@ document.getElementById('btn-reset').addEventListener('click', () => {
   renderPreview();
 });
 
-// jsPDF is ~85% of the bundle; load it only when the user actually downloads.
+// The PDF engine is most of the bundle; load it only when the user downloads.
 const btnDownload = document.getElementById('btn-download');
 btnDownload.addEventListener('click', async () => {
   btnDownload.disabled = true;
   try {
     const { downloadPdf } = await import('./pdf.js');
-    downloadPdf(inv);
+    await downloadPdf(inv);
+    // Usage analytics only — no invoice content leaves the browser.
+    if (typeof gtag === 'function') {
+      gtag('event', 'pdf_download', {
+        invoice_language: inv.lang,
+        currency: inv.currency,
+        line_items: inv.items.length,
+      });
+    }
   } finally {
     btnDownload.disabled = false;
   }
