@@ -2,11 +2,12 @@
 
 export const CURRENCY_SYMBOLS = {
   USD: '$', EUR: '€', GBP: '£', CNY: '¥', JPY: '¥', AUD: '$', CAD: '$', INR: '₹',
-  KRW: '₩', VND: '₫', IDR: 'Rp ', SGD: 'S$', BRL: 'R$',
+  KRW: '₩', VND: '₫', IDR: 'Rp ', SGD: 'S$', BRL: 'R$', CHF: 'CHF ',
 };
 
 const ZERO_DECIMAL = new Set(['JPY', 'KRW', 'VND', 'IDR']);
 const SYMBOL_AFTER = new Set(['VND']); // 10,000 ₫
+const NUMBER_LOCALE = { CHF: 'de-CH' }; // Swiss grouping: 1’000.00
 
 export function defaultInvoice(today = new Date().toISOString().slice(0, 10)) {
   return {
@@ -38,7 +39,7 @@ export function computeTotals(inv) {
 export function formatMoney(amount, currency) {
   const symbol = CURRENCY_SYMBOLS[currency] || '';
   const digits = ZERO_DECIMAL.has(currency) ? 0 : 2;
-  const n = (Number(amount) || 0).toLocaleString('en-US', {
+  const n = (Number(amount) || 0).toLocaleString(NUMBER_LOCALE[currency] || 'en-US', {
     minimumFractionDigits: digits,
     maximumFractionDigits: digits,
   });

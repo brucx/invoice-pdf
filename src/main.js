@@ -1,5 +1,5 @@
 import './style.css';
-import { defaultInvoice, computeTotals, formatMoney } from './invoice.js';
+import { defaultInvoice, computeTotals, formatMoney, CURRENCY_SYMBOLS } from './invoice.js';
 import { labels, LANGS } from './i18n.js';
 
 const STORAGE_KEY = 'invoice-pdf:draft';
@@ -10,15 +10,18 @@ const preview = document.getElementById('preview');
 
 let inv = loadDraft();
 
-// Landing pages deep-link with ?lang=de or ?lang=en-zh to preselect the
-// invoice language; the rest of the draft is left untouched.
-const urlLang = new URLSearchParams(location.search).get('lang');
+// Landing pages deep-link with ?lang=de&currency=CHF to preselect language
+// and currency; the rest of the draft is left untouched.
+const urlParams = new URLSearchParams(location.search);
+const urlLang = urlParams.get('lang');
 if (urlLang) {
   const parts = urlLang.split('-');
   if (parts.length <= 2 && new Set(parts).size === parts.length && parts.every((p) => LANGS.includes(p))) {
     inv.lang = urlLang;
   }
 }
+const urlCurrency = (urlParams.get('currency') || '').toUpperCase();
+if (urlCurrency in CURRENCY_SYMBOLS) inv.currency = urlCurrency;
 
 function loadDraft() {
   try {

@@ -21,6 +21,8 @@ export default defineConfig({
         'portuguese-invoice-template': resolve(import.meta.dirname, 'portuguese-invoice-template.html'),
         'chinese-invoice-template': resolve(import.meta.dirname, 'chinese-invoice-template.html'),
         'japanese-invoice-template': resolve(import.meta.dirname, 'japanese-invoice-template.html'),
+        'rechnungsvorlage-schweiz': resolve(import.meta.dirname, 'rechnungsvorlage-schweiz.html'),
+        'invoice-template-word-excel': resolve(import.meta.dirname, 'invoice-template-word-excel.html'),
       },
     },
   },

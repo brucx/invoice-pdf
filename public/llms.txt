@@ -3,7 +3,7 @@
 > Free in-browser invoice PDF generator at https://invoices-generator.net. Fill out a form, see a live preview, and download a professional A4 invoice PDF. No sign-up, no watermark, no server — the PDF is generated client-side and user data never leaves the browser (drafts autosave to localStorage only).
 
 Key facts:
-- Supports itemized line items (description × quantity × unit price), percentage tax and discount, notes, and 13 currencies (USD, EUR, GBP, CNY, JPY, AUD, CAD, INR, KRW, VND, IDR, SGD, BRL) with correct decimal and symbol-placement rules.
+- Supports itemized line items (description × quantity × unit price), percentage tax and discount, notes, and 14 currencies (USD, EUR, GBP, CNY, JPY, AUD, CAD, INR, KRW, VND, IDR, SGD, BRL, CHF) with correct decimal and symbol-placement rules.
 - Invoice-content languages (12): English, Chinese, Japanese, Korean, Vietnamese, Spanish, German, French, Dutch, Italian, Portuguese, Indonesian — pick a primary language plus an optional second one for dual-language labels like "Amount / 金额". Landing pages can deep-link with ?lang=de etc. to preselect. Simplified/traditional Chinese, Japanese, Korean Hangul, and Vietnamese diacritics render in the PDF via embedded, per-document-subsetted Noto Sans fonts, with per-word font fallback for mixed-script lines.
 - Produces commercial/proforma invoices — NOT a Chinese tax fapiao (发票) and not a Japanese qualified invoice (適格請求書).
 - Free with no usage limits; no account or API required.
@@ -26,6 +26,8 @@ Key facts:
 - [Dutch Invoice Template](https://invoices-generator.net/dutch-invoice-template): factuur maken / factuursjabloon
 - [Italian Invoice Template](https://invoices-generator.net/italian-invoice-template): modello fattura (not an SdI e-invoice)
 - [Portuguese Invoice Template](https://invoices-generator.net/portuguese-invoice-template): modelo de fatura (not an NF-e)
+- [Rechnungsvorlage Schweiz](https://invoices-generator.net/rechnungsvorlage-schweiz): Swiss invoices in CHF with Swiss number formatting (no QR-Rechnung payment part)
+- [Word/Excel vs PDF](https://invoices-generator.net/invoice-template-word-excel): honest comparison of Word/Excel invoice templates vs this generator
 
 ## Source
 
