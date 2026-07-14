@@ -84,12 +84,27 @@
     ]
   }
   </script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-89C4DM8EX9"></script>
   <script>
+    /* GA4, deferred off the critical path: queue events now, load gtag.js on
+       first interaction (4s fallback) so it costs nothing at render time. */
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-89C4DM8EX9');
+    (function () {
+      var done = false;
+      function load() {
+        if (done) return; done = true;
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-89C4DM8EX9';
+        document.head.appendChild(s);
+      }
+      ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (e) {
+        addEventListener(e, load, { once: true, passive: true });
+      });
+      setTimeout(load, 4000);
+    })();
   </script>
 </head>
 <body>
