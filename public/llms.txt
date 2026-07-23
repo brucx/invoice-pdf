@@ -31,4 +31,4 @@ Key facts:
 
 ## Source
 
-- [GitHub repository](https://github.com/brucx/invoice-pdf): source code — Vite + jsPDF, hosted on Cloudflare Workers
+- [GitHub repository](https://github.com/brucx/invoice-pdf): open source (MIT) — Vite + pdf-lib + HarfBuzz wasm, hosted on Cloudflare Workers

@@ -67,3 +67,7 @@ Font subsets are committed under `public/fonts/`; regenerate with `python3 scrip
 - **No RTL or shaped scripts.** Arabic/Hebrew need bidi + shaping, Thai/Devanagari need shaping — pdf-lib's `drawText` does neither, and doing it right means running HarfBuzz for shaping, not just subsetting. Deliberately out of scope for now.
 - **Charsets are bounded** by the build-time subsets; a truly rare ideograph or an emoji becomes tofu.
 - Single template, no logo upload yet.
+
+## License
+
+[MIT](LICENSE). Font subsets in `public/fonts/` are derived from [Noto Sans](https://fonts.google.com/noto) (SIL OFL 1.1).
